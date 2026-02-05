@@ -124,6 +124,25 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
 }
 
 .hero-title {
@@ -158,10 +177,32 @@ body {
 .btn-primary {
     background-color: var(--color-white);
     color: var(--color-primary);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 107, 107, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+}
+
+.btn-primary:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -177,19 +218,51 @@ body {
 .section-cta {
     background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-secondary) 100%);
     color: var(--color-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.section-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     text-align: center;
     font-family: var(--font-heading);
     color: var(--color-dark);
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border-radius: 2px;
 }
 
 .section-cta .section-title {
     color: var(--color-white);
+}
+
+.section-cta .section-title::after {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
 }
 
 .subsection-title {
@@ -211,7 +284,7 @@ body {
     max-width: 900px;
     margin: 0 auto;
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .content-grid p {
@@ -241,16 +314,18 @@ body {
 
 .workshop-card {
     background-color: var(--color-white);
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-md);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .workshop-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
     box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
 }
 
 .workshop-number {
@@ -265,6 +340,13 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0 auto 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+
+.workshop-card:hover .workshop-number {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
 }
 
 .workshop-card h4 {
@@ -289,19 +371,49 @@ body {
 .involvement-card {
     background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     border-radius: var(--radius-md);
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .involvement-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
 .involvement-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.involvement-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: brightness(0.95);
+}
+
+.involvement-card:hover .involvement-icon {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.involvement-card:hover .involvement-icon img {
+    transform: scale(1.1);
+    filter: brightness(1.1);
 }
 
 .involvement-card h3 {
@@ -319,10 +431,17 @@ body {
     max-width: 600px;
     margin: 0 auto;
     text-align: center;
-    padding: 2rem;
+    padding: 2.5rem;
     background-color: var(--color-white);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.founder-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
 }
 
 .founder-name {
@@ -383,9 +502,14 @@ body {
     max-width: 600px;
     margin: 0 auto;
     background-color: var(--color-light);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-md);
+    transition: box-shadow 0.3s ease;
+}
+
+.contact-form:hover {
+    box-shadow: var(--shadow-lg);
 }
 
 .form-group {
@@ -402,18 +526,21 @@ body {
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 12px;
+    padding: 14px 16px;
     border: 2px solid #e0e0e0;
     border-radius: var(--radius-sm);
     font-family: var(--font-primary);
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
+    background-color: var(--color-white);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+    transform: translateY(-1px);
 }
 
 .form-group textarea {
@@ -487,6 +614,15 @@ body {
 
     .hero {
         padding: 140px 20px 80px;
+    }
+
+    .involvement-icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .involvement-card {
+        padding: 2rem 1.5rem;
     }
 }
 

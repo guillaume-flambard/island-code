@@ -61,9 +61,10 @@ if (contactForm) {
         const message = document.getElementById('message').value;
         
         // Create mailto link (you can replace this with a backend service later)
-        const subject = encodeURIComponent(`Contact from ${name}`);
-        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-        const mailtoLink = `mailto:guillaume@islandcodeforlocals.com?subject=${subject}&body=${body}`;
+        const senderName = name || 'Memo';
+        const subject = encodeURIComponent(`Contact from ${senderName}`);
+        const body = encodeURIComponent(`Name: ${senderName}\nEmail: ${email}\n\nMessage:\n${message}`);
+        const mailtoLink = `mailto:g.flambard@gmail.com?subject=${subject}&body=${body}`;
         
         // Open email client
         window.location.href = mailtoLink;
@@ -71,7 +72,7 @@ if (contactForm) {
         // Show success message
         const successMessage = document.createElement('div');
         successMessage.style.cssText = 'background-color: #4ECDC4; color: white; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center;';
-        successMessage.textContent = 'Thank you! Your email client should open. If not, please email us directly at guillaume@islandcodeforlocals.com';
+        successMessage.textContent = 'Thank you! Your email client should open. If not, please email us directly at g.flambard@gmail.com';
         contactForm.appendChild(successMessage);
         
         // Reset form
